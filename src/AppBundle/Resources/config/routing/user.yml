@@ -1,0 +1,9 @@
+login:
+  path: /login
+  defaults: { _controller: AppBundle:User:login }
+  methods: GET
+
+register:
+  path: /register
+  defaults: { _controller: AppBundle:User:register }
+  methods: GET

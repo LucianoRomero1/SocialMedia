@@ -2,6 +2,12 @@
 # https://symfony.com/doc/current/security.html
 security:
 
+    encoders: 
+        BackendBundle\Entity\User: 
+            algorithm: bcrypt
+            # Cuantas veces queremos que se vuelva a cifrar la pw
+            cost: 4
+
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:

@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS curso_social_network;
-USE curso_social_network;
+CREATE DATABASE IF NOT EXISTS symfony_social_media;
+USE symfony_social_media;
 
 CREATE TABLE users(
 id       int(255) auto_increment not null,
