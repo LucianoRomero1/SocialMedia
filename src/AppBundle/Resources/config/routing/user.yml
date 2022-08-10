@@ -6,4 +6,4 @@ login:
 register:
   path: /register
   defaults: { _controller: AppBundle:User:register }
-  methods: GET
+  methods: ["GET", "POST"]

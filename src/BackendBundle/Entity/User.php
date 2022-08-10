@@ -15,48 +15,68 @@ class User
     /**
      * @var string
      */
-    private $role = 'NULL';
+    private $role;
 
     /**
      * @var string
      */
-    private $email = 'NULL';
+    private $email;
 
     /**
      * @var string
      */
-    private $name = 'NULL';
+    private $name;
 
     /**
      * @var string
      */
-    private $surname = 'NULL';
+    private $surname;
 
     /**
      * @var string
      */
-    private $password = 'NULL';
+    private $password;
 
     /**
      * @var string
      */
-    private $nick = 'NULL';
+    private $nick;
 
     /**
      * @var string
      */
-    private $bio = 'NULL';
+    private $bio;
 
     /**
      * @var string
      */
-    private $active = 'NULL';
+    private $active;
 
     /**
      * @var string
      */
-    private $image = 'NULL';
+    private $image;
 
+
+    public function getUsername(){
+        return $this->email;
+    }
+
+    public function getSalt(){
+        return null;
+    }
+
+    public function getRoles(){
+        return $this->getRole();
+    }
+
+    public function eraseCredentials(){
+
+    }
+
+    public function __toString(){
+        return $this->name;
+    }
 
     /**
      * Get id

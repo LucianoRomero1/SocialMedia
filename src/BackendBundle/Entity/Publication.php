@@ -15,27 +15,27 @@ class Publication
     /**
      * @var string
      */
-    private $text = 'NULL';
+    private $text;
 
     /**
      * @var string
      */
-    private $document = 'NULL';
+    private $document;
 
     /**
      * @var string
      */
-    private $image = 'NULL';
+    private $image;
 
     /**
      * @var string
      */
-    private $status = 'NULL';
+    private $status;
 
     /**
      * @var \DateTime
      */
-    private $createdAt = 'NULL';
+    private $createdAt;
 
     /**
      * @var \BackendBundle\Entity\User

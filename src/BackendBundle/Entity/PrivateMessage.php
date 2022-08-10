@@ -15,27 +15,27 @@ class PrivateMessage
     /**
      * @var string
      */
-    private $message = 'NULL';
+    private $message;
 
     /**
      * @var string
      */
-    private $file = 'NULL';
+    private $file;
 
     /**
      * @var string
      */
-    private $image = 'NULL';
+    private $image;
 
     /**
      * @var string
      */
-    private $readed = 'NULL';
+    private $readed;
 
     /**
      * @var \DateTime
      */
-    private $createdAt = 'NULL';
+    private $createdAt;
 
     /**
      * @var \BackendBundle\Entity\User

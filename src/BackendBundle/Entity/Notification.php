@@ -15,27 +15,27 @@ class Notification
     /**
      * @var string
      */
-    private $type = 'NULL';
+    private $type;
 
     /**
      * @var integer
      */
-    private $typeId = 'NULL';
+    private $typeId;
 
     /**
      * @var string
      */
-    private $readed = 'NULL';
+    private $readed;
 
     /**
      * @var \DateTime
      */
-    private $createdAt = 'NULL';
+    private $createdAt;
 
     /**
      * @var string
      */
-    private $extra = 'NULL';
+    private $extra;
 
     /**
      * @var \BackendBundle\Entity\User

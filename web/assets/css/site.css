@@ -1,0 +1,39 @@
+body{
+    background-color: #eee;
+}
+
+.alert-success{
+    background-color: rgb(181, 236, 213);
+    border: none;
+    padding: 15px;
+    position: fixed;
+    z-index: 100;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    cursor: pointer;
+    color: black;
+}
+.alert-error{
+    background-color: rgb(219, 94, 112);
+    border: none;
+    padding: 15px;
+    position: fixed;
+    z-index: 100;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    cursor: pointer;
+    color: black;
+}
+
+.box-form{
+    background-color: whitesmoke;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0px auto;
+    float: none;
+}
+
+.box-form input{
+    margin-bottom: 10px;
+}

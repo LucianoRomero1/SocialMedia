@@ -14,8 +14,8 @@
             <script src="{{ asset('assets/js/jquery-3.6.min.js') }}"></script>
             <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('assets/js/fontawesome.js') }}" crossorigin="anonymous"></script>
+            <script src="{{ asset('assets/js/addFlash.js') }}" crossorigin="anonymous"></script>
         {% endblock %}
-        
     </head>
     <body>
         <header>
@@ -44,7 +44,7 @@
                                 <a class="nav-link" href="{{path('login')}}"><i class="me-1 fa-solid fa-right-to-bracket"></i>Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{path('login')}}"><i class="me-1 fa-solid fa-user"></i>Register</a>
+                                <a class="nav-link" href="{{path('register')}}"><i class="me-1 fa-solid fa-user"></i>Register</a>
                             </li>
                         </ul>
                     </div>
@@ -52,6 +52,25 @@
             </nav>
         </header>
         <section class="container-fluid" id="content">
+            {# ACOMODAR ESTO CON UN ROW #}
+            <div class="float-end w-50">
+                {% for message in app.flashes('success') %}
+                    <div class="alert-success" role="alert">
+                    <h6 class="text-info">{{ message }}</h6>
+                        <div class="float-end">
+                            <span class="link-secondary" onclick="hide('alert-success')"><i class="fas fa-window-close fa-2x"></i></span>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="alert-error" role="alert">
+                    <h6 class="text-white">{{ message }}</h6>
+                        <div class="float-end">
+                            <span class="link-light" onclick="hide('alert-error')"><i class="fas fa-window-close fa-2x"></i></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
             {% block body %}
 
             {% endblock %}
