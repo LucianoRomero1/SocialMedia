@@ -6,6 +6,7 @@ use BackendBundle\Entity\User;
 use AppBundle\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller{
     
@@ -79,4 +80,20 @@ class UserController extends Controller{
 
     }
 
+    public function nickTestAction(Request $request){
+        $nick       = $request-> get("nick");
+
+        $em         = $this->getDoctrine()->getManager();
+        $user_repo  = $em->getRepository(User::class);
+        $user_isset = $user_repo->findOneBy(["nick" => $nick]);
+
+        $result     = "used";
+        if(count($user_isset) >= 1 && is_object($user_isset)){
+            $result = "used";
+        }else{
+            $result = "unused";
+        }
+
+        return new Response($result);
+    }
 }

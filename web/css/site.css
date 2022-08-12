@@ -1,0 +1,16 @@
+body{
+    background-color: #eee;
+}
+
+.box-form{
+    background-color: whitesmoke;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0px auto;
+    float: none;
+}
+
+.box-form input{
+    margin-bottom: 10px;
+}

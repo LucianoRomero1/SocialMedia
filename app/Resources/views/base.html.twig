@@ -7,14 +7,14 @@
         </title>
         {% block stylesheets %}
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-            <link href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
-            <link href="{{ asset('assets/css/site.css') }}" type="text/css" rel="stylesheet">
+            <link href="{{ asset('css/bootstrap.css') }}" type="text/css" rel="stylesheet">
+            <link href="{{ asset('css/site.css') }}" type="text/css" rel="stylesheet">
         {% endblock %}
         {% block javascripts %}
-            <script src="{{ asset('assets/js/jquery-3.6.min.js') }}"></script>
-            <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('assets/js/fontawesome.js') }}" crossorigin="anonymous"></script>
-            <script src="{{ asset('assets/js/addFlash.js') }}" crossorigin="anonymous"></script>
+            <script src="{{ asset('js/jquery-3.6.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+            <script src="{{ asset('js/fontawesome.js') }}"></script>
+            <script src="{{ asset('js/addFlash.js') }}"></script>
         {% endblock %}
     </head>
     <body>
@@ -53,22 +53,24 @@
         </header>
         <section class="container-fluid" id="content">
             {# ACOMODAR ESTO CON UN ROW #}
-            <div class="float-end w-50">
+            <div class="container mt-2">
                 {% for message in app.flashes('success') %}
-                    <div class="alert-success" role="alert">
+                    <div class="alert alert-success">{{message}}</div>
+                    {# <div class="alert-success" role="alert">
                     <h6 class="text-info">{{ message }}</h6>
                         <div class="float-end">
                             <span class="link-secondary" onclick="hide('alert-success')"><i class="fas fa-window-close fa-2x"></i></span>
                         </div>
-                    </div>
+                    </div> #}
                 {% endfor %}
                 {% for message in app.flashes('error') %}
-                    <div class="alert-error" role="alert">
+                    <div class="alert alert-danger">{{message}}</div>
+                    {# <div class="alert-error" role="alert">
                     <h6 class="text-white">{{ message }}</h6>
                         <div class="float-end">
                             <span class="link-light" onclick="hide('alert-error')"><i class="fas fa-window-close fa-2x"></i></span>
                         </div>
-                    </div>
+                    </div> #}
                 {% endfor %}
             </div>
             {% block body %}

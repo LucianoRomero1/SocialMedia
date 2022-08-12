@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
 
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{asset('js/customJs/nickTest.js')}}"></script>
+{% endblock %}
+
 {% block body %}
     <div class="container mt-2 box-form">
         <h2>Register</h2>
