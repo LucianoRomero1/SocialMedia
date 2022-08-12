@@ -11,6 +11,10 @@ body{
     float: none;
 }
 
-.box-form input{
+.box-form input, .box-form textarea{
     margin-bottom: 10px;
+}
+
+.form-control{
+    margin-top: 5px;
 }
