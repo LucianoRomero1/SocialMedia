@@ -39,7 +39,8 @@
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav ms-auto" *ngIf="!identity">
+                        {% if app.user == null %}
+                        <ul class="nav navbar-nav ms-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{path('login')}}"><i class="me-1 fa-solid fa-right-to-bracket"></i>Login</a>
                             </li>
@@ -47,6 +48,23 @@
                                 <a class="nav-link" href="{{path('register')}}"><i class="me-1 fa-solid fa-user"></i>Register</a>
                             </li>
                         </ul>
+                        {% else %}
+                        <ul class="nav navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user me-1"></i>{{app.user.name}} {{app.user.surname}}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="me-1 fa-solid fa-user-pen"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="me-1 fa-solid fa-gear"></i>Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#"><i class="me-1 fa-solid fa-circle-question"></i>Help</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="me-1 fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                        {% endif %}
                     </div>
                 </div>
             </nav>
@@ -56,21 +74,9 @@
             <div class="container mt-2">
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success">{{message}}</div>
-                    {# <div class="alert-success" role="alert">
-                    <h6 class="text-info">{{ message }}</h6>
-                        <div class="float-end">
-                            <span class="link-secondary" onclick="hide('alert-success')"><i class="fas fa-window-close fa-2x"></i></span>
-                        </div>
-                    </div> #}
                 {% endfor %}
                 {% for message in app.flashes('error') %}
                     <div class="alert alert-danger">{{message}}</div>
-                    {# <div class="alert-error" role="alert">
-                    <h6 class="text-white">{{ message }}</h6>
-                        <div class="float-end">
-                            <span class="link-light" onclick="hide('alert-error')"><i class="fas fa-window-close fa-2x"></i></span>
-                        </div>
-                    </div> #}
                 {% endfor %}
             </div>
             {% block body %}

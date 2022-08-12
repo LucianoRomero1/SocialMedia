@@ -3,6 +3,13 @@ login:
   defaults: { _controller: AppBundle:User:login }
   methods: GET
 
+## a estas dos no le hago methods y default, porque apunto a una funcion que symfony me hace solo 
+login_check:
+  path: /login_check
+
+logout:
+  path: /logout
+
 register:
   path: /register
   defaults: { _controller: AppBundle:User:register }

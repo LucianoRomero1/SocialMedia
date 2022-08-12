@@ -1,5 +1,22 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1 class="text-danger">TITLE</h1>
+       <div class="col-md-6 mt-2 box-form">
+        <h2>Login</h2>
+        <hr>
+        <form action="{{path('login_check')}}" method="POST">
+            <label for="email">Email</label>
+            {# usa username porque para el login considera al email como username #}
+            <input class="form-control" type="email" id="username" name="_username" value="{{last_username}}">
+            <label for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="_password">
+
+            <input class="btn btn-outline-info"  type="submit" value="Login">
+            {# Cuando se loguee correctamente con este input le definimos a donde queremos que vaya #}
+            <input type="hidden" name="_target_path" value="/home">
+        </form>
+        {# {{form_start(form, {'action': '', 'method': 'POST'})}}
+        {{form_errors(form)}}
+        {{form_end(form)}} #}
+    </div>
 {% endblock %}

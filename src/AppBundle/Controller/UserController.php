@@ -12,11 +12,28 @@ class UserController extends Controller{
     
     public function loginAction(Request $request){
 
-        return $this->render("user/login.html.twig");
+        if(is_object($this->getUser())){
+            return $this->redirect("home");
+        }
+
+        //Servicio de authenticacion de Symfony
+        $authenticationUtils= $this->get('security.authentication_utils');
+        $error              = $authenticationUtils->getLastAuthenticationError();
+        //Te saca el ultimo usuario que intentó loguearse para setearlo en el value del email por si pifiaste la PW
+        $last_username      = $authenticationUtils->getLastUsername();
+
+        return $this->render("user/login.html.twig", array(
+            "last_username" => $last_username,
+            "error"         => $error
+        ));
 
     }
     
     public function registerAction(Request $request){
+
+        if(is_object($this->getUser())){
+            return $this->redirect("home");
+        }
 
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -50,7 +67,7 @@ class UserController extends Controller{
                 $password   = $encoder->encodePassword($password, $user->getSalt());
 
                 $user->setPassword($password);
-                $user->setRole("ROLE_USER");
+                $user->setRole(["ROLE_USER"]);
                 $user->setImage(null);
 
                 $em->persist($user);
