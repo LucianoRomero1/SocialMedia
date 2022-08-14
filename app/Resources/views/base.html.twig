@@ -52,14 +52,21 @@
                         <ul class="nav navbar-nav ms-auto">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-user me-1"></i>{{app.user.name}} {{app.user.surname}}
+                                    <div class="avatar">
+                                        {% if app.user.image == null %}
+                                            <img src="{{asset('img/default.png')}}" alt="Profile photo" />
+                                        {% else %}
+                                            <img src="{{asset('uploads/users/'~ app.user.image )}}" alt="Profile photo" />
+                                        {% endif %}
+                                    </div>
+                                    {{app.user.name}} {{app.user.surname}}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#"><i class="me-1 fa-solid fa-user-pen"></i>Profile</a></li>
                                     <li><a class="dropdown-item" href="{{path('user_edit')}}"><i class="me-1 fa-solid fa-gear"></i>Settings</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#"><i class="me-1 fa-solid fa-circle-question"></i>Help</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="me-1 fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                                    <li><a class="dropdown-item" href="{{path('logout')}}"><i class="me-1 fa-solid fa-right-from-bracket"></i>Logout</a></li>
                                 </ul>
                             </li>
                             

@@ -2,6 +2,26 @@ body{
     background-color: #eee;
 }
 
+/* Header */
+.avatar{
+    background: white;
+    border-radius: 500px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    float: left;
+    margin-right: 8px;
+    margin-top: -2px;
+}
+
+.avatar img{
+    height: 100%;
+    text-align: center;
+}
+
+
+/* Register */
+
 .box-form{
     background-color: whitesmoke;
     border: 1px solid #ccc;

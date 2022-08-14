@@ -1,0 +1,14 @@
+BackendBundle\Entity\User:
+  properties:
+    name: 
+      - NotBlank: {message: "Name can not be blank"}
+    surname: 
+      - NotBlank: {message: "Surname can not be blank"}
+    nick: 
+      - NotBlank: {message: "Nick can not be blank"}
+    email: 
+      - NotBlank: {message: "Email can not be blank"}
+      - Email:
+        ##Si aca no meto doble tab y una palabra antes del value, no funca
+          message: email {{ value }} invalid.
+          checkMX: true
