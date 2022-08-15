@@ -182,4 +182,20 @@ class UserController extends Controller{
             "form"  => $form->createView()
         ));
     }
+
+    public function usersAction(Request $request){
+        $em         = $this->getDoctrine()->getManager();
+
+        $dql        = "SELECT u FROM BackendBundle:User u";
+        $query      = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, $request->query->getInt('page', 1), 5
+        );
+
+        return $this->render('user/users.html.twig', array(
+            "pagination" => $pagination
+        ));
+    }
 }
