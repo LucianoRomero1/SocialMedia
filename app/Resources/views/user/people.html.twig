@@ -9,11 +9,25 @@
     <div class="container mt-2">
         <div class="col-md-12 box-default">
             <h1>People</h1>
-            <div class="count">
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="{{path('user_search')}}"> 
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search people" name="search">
+                            <div class="input-group-append mt-1">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-solid fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="count mt-2">
                 <span class="badge bg-primary">
                     Total people: {{pagination.getTotalItemCount}}
                 </span>
-            </div>
+            </div> 
             <hr>
             <div class="box-content box-users">
                 {% for user in pagination %}
