@@ -9,3 +9,7 @@ app_user:
 app_publication:
   resource: "@AppBundle/Resources/config/routing/publication.yml"
   prefix: /
+
+app_following:
+  resource: "@AppBundle/Resources/config/routing/following.yml"
+  prefix: /

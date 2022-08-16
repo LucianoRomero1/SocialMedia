@@ -13,6 +13,7 @@
         {% block javascripts %}
             <script src="{{ asset('js/jquery-3.6.js') }}"></script>
             <script src="{{ asset('js/bootstrap.js') }}"></script>
+            <script src="{{ asset('js/jquery-ias.min.js') }}"></script>
             <script src="{{ asset('js/fontawesome.js') }}"></script>
             <script src="{{ asset('js/addFlash.js') }}"></script>
         {% endblock %}
@@ -39,6 +40,18 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{path('user_list')}}"><i class="me-1 fa-solid fa-list"></i>People</a>
+                            </li>
+                            <li class="nav-item ms-2">
+                                <form action="{{path('user_search')}}"> 
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search people" name="search">
+                                        <div class="input-group-append mt-1">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa-solid fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav ms-auto">

@@ -11,4 +11,4 @@ BackendBundle\Entity\User:
       - Email:
         ##Si aca no meto doble tab y una palabra antes del value, no funca
           message: email {{ value }} invalid.
-          checkMX: true
+          checkMX: false

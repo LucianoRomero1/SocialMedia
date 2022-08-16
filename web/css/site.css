@@ -3,7 +3,7 @@ body{
 }
 
 /* Header */
-.avatar{
+.navbar .avatar{
     background: white;
     border-radius: 500px;
     width: 30px;
@@ -14,7 +14,7 @@ body{
     margin-top: -2px;
 }
 
-.avatar img{
+.navbar .avatar img{
     height: 100%;
     text-align: center;
 }
@@ -22,7 +22,7 @@ body{
 
 /* Register */
 
-.box-form{
+.box-form, .box-default{
     background-color: whitesmoke;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -38,3 +38,25 @@ body{
 .form-control{
     margin-top: 5px;
 }
+
+/* PEOPLE */
+
+.user-item .avatar{
+    background: #eee;
+    border-radius: 500px;
+    width: 90px;
+    height: 75px;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.user-item .avatar img{
+    height: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.user-item-content{
+    padding: 10px;
+}
+

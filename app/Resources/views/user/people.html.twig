@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{asset('js/customJs/users.js')}}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-2">
+        <div class="col-md-12 box-default">
+            <h1>People</h1>
+            <div class="count">
+                <span class="badge bg-primary">
+                    Total people: {{pagination.getTotalItemCount}}
+                </span>
+            </div>
+            <hr>
+            <div class="box-content box-users">
+                {% for user in pagination %}
+                    <div class="row user-item">
+                        <div class="col-md-4 avatar">
+                            {% if user.image == null %}
+                                <img src="{{asset('img/default.png')}}" alt="Profile photo" />
+                            {% else %}
+                                <img src="{{asset('uploads/users/'~ user.image )}}" alt="Profile photo" />
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8 user-item-content">
+                            <p>{{user.surname}} {{user.name}} - {{user.nick}}</p>
+                            <p class="text-truncate">{{user.bio}}</p>
+                        </div>
+                        {# Valido esto para que no aparezca el boton de seguir en mi propio user #}
+                        {% if app.user.id != user.id %}
+                        <div class="col-md-2 text-right">
+                            <button class="btn btn-sm btn-success btn-follow" 
+                                {% if app.user|following(user) == true %}
+                                    hidden
+                                {% endif %}
+                                data-followed="{{user.id}}" title="Follow">
+                                <i class="fas fa-user-plus"></i>
+                            </button>
+                            <button class="btn btn-sm btn-dark btn-unfollow" 
+                                {% if app.user|following(user) == false %}
+                                    hidden
+                                {% endif %}
+                                data-followed="{{user.id}}" title="Unfollow">
+                                <i class="fa-solid fa-user-minus"></i>
+                            </button>
+                                
+                        </div>
+                        {% endif %}
+                        <hr>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+            <div class="navigation mt-3">
+                {{knp_pagination_render(pagination)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

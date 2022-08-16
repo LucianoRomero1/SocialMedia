@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 
     $(".nick-input").blur(function(){
         var nick = this.value;

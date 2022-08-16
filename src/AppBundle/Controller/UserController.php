@@ -138,7 +138,7 @@ class UserController extends Controller{
                         ));
 
             $user_isset= $query->getQuery()->getResult();
-            if($user->getEmail() == $user_isset[0]->getEmail() && $user->getNick() == $user_isset[0]->getNick() || count($user_isset) == 0){
+            if(count($user_isset) == 0 || ($user->getEmail() == $user_isset[0]->getEmail() && $user->getNick() == $user_isset[0]->getNick())){
                 //Upload file
                 $file = $form->get("image")->getData();
                 if(!empty($file) && $file != null){
@@ -186,7 +186,7 @@ class UserController extends Controller{
     public function usersAction(Request $request){
         $em         = $this->getDoctrine()->getManager();
 
-        $dql        = "SELECT u FROM BackendBundle:User u";
+        $dql        = "SELECT u FROM BackendBundle:User u ORDER BY u.id ASC";
         $query      = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
@@ -194,7 +194,29 @@ class UserController extends Controller{
             $query, $request->query->getInt('page', 1), 5
         );
 
-        return $this->render('user/users.html.twig', array(
+        return $this->render('user/people.html.twig', array(
+            "pagination" => $pagination
+        ));
+    }
+
+    // BUSCADOR SIMPLE Y CON INFINITE SCROLL
+    public function searchAction(Request $request){
+        $em         = $this->getDoctrine()->getManager();
+        //Con query agarro los param de get de la URL
+        $search     = $request->query->get('search', null);
+        if($search == null){
+            return $this->redirect($this->generateUrl('home_publications'));
+        }
+
+        $dql        = "SELECT u FROM BackendBundle:User u WHERE u.name LIKE :search OR u.surname LIKE :search OR u.nick LIKE :search ORDER BY u.id ASC";
+        $query      = $em->createQuery($dql)->setParameter('search', "%$search%");
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, $request->query->getInt('page', 1), 5
+        );
+
+        return $this->render('user/people.html.twig', array(
             "pagination" => $pagination
         ));
     }
