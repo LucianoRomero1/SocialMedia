@@ -1,3 +1,7 @@
 home_publications:
   path: /home
   defaults: { _controller: AppBundle:Publication:index }
+
+delete_publications:
+  path: /publication/delete/{id}
+  defaults: { _controller: AppBundle:Publication:deletePublication, id:null }
