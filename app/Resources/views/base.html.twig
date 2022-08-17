@@ -41,18 +41,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{path('user_list')}}"><i class="me-1 fa-solid fa-list"></i>People</a>
                             </li>
-                            {# <li class="nav-item ms-2">
-                                <form action="{{path('user_search')}}"> 
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search people" name="search">
-                                        <div class="input-group-append mt-1">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fa-solid fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </li> #}
                         </ul>
                         <ul class="nav navbar-nav ms-auto">
                             <li class="nav-item dropdown">
@@ -81,13 +69,15 @@
             </nav>
         </header>
         <section class="container-fluid" id="content">
-            {# ACOMODAR ESTO CON UN ROW #}
             <div class="container mt-2">
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success">{{message}}</div>
                 {% endfor %}
                 {% for message in app.flashes('error') %}
                     <div class="alert alert-danger">{{message}}</div>
+                {% endfor %}
+                {% for message in app.session.flashbag().get('status') %}
+                    <div class="alert alert-success">{{message}}</div>
                 {% endfor %}
             </div>
             {% block body %}

@@ -2,6 +2,10 @@ body{
     background-color: #eee;
 }
 
+label {
+    font-weight: bold !important;
+}
+
 /* Header */
 .navbar .avatar{
     background: white;
@@ -72,7 +76,7 @@ body{
 #user-card .avatar{
     background: #eee;
     border-radius: 500px;
-    width: 75px;
+    width: 95px;
     height: 75px;
     overflow: hidden;
     margin: 5px;
@@ -80,6 +84,7 @@ body{
 
 #user-card .avatar img{
     height: 100%;
+    width: 100%;
     text-align: center;
 }
 
@@ -98,5 +103,9 @@ body{
 
 #timeline{
     min-height: 750px;
+}
+
+#new-publication input, #new-publication textarea{
+    margin-bottom: 10px;
 }
 
