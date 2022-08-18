@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{asset('js/customJs/profile.js')}}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-md-7 profile-box">
+
+        <div class="avatar">
+            {% if user.image == null %}
+                <img src="{{asset('img/default.png')}}" alt="Profile photo" />
+            {% else %}
+                <img src="{{asset('uploads/users/'~ user.image )}}" alt="Profile photo" />
+            {% endif %}
+        </div>
+
+        <div class="name-surname">
+            <h2>{{user.name}} {{user.surname}}</h2>
+            <span class="nickname">{{user.nick}}</span>
+        </div>
+
+        <div class="bio">
+            {{user.bio}}
+        </div>
+        <hr>
+         {% set user_stats = user|user_stats %}
+        <div id="user-stats" class="row">
+            <div class="col-md-3">
+                <div class="following-data">
+                    <a href="{{path('following_users', {'nickname': user.nick})}}">
+                        <span class="label-stat">
+                            Following
+                        </span>
+                        <span class="number-stat">
+                            {{user_stats.following}}
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="following-data">
+                    <a href="{{path('followed_users', {'nickname': user.nick})}}">
+                        <span class="label-stat">
+                            Followers
+                        </span>
+                        <span class="number-stat">
+                            {{user_stats.followers}}
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="following-data ">
+                    <a href="{{path('user_profile', {'nickname': user.nick})}}">
+                        <span class="label-stat">
+                            Posts
+                        </span>
+                        <span class="number-stat">
+                            {{user_stats.posts}}
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="following-data ">
+                    <a href="{{path('user_likes', {'nickname': user.nick})}}">
+                        <span class="label-stat">
+                            Favs
+                        </span>
+                        <span class="number-stat">
+                            {{user_stats.favs}}
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="user-publications" class="box-content">
+            {% for publication in pagination %}
+            <div class="row publication-item">
+                <div class="col-md-1">
+                    <div class="avatar">
+                        {% if publication.user.image == null %}
+                            <img src="{{asset('img/default.png')}}" alt="Profile photo" />
+                        {% else %}
+                            <img src="{{asset('uploads/users/'~ publication.user.image )}}" alt="Profile photo" />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-9 ms-5 publication-item-content">
+                    <p>
+                        <a class="pub-name-link" href="{{path('user_profile', {'nickname': publication.user.nick})}}">
+                            {{publication.user.nick}}
+                        </a>
+                        -
+                        <span class="text-muted">{{publication.createdAt|long_time}}</span>
+                    </p>
+
+                    <p>{{publication.text}}</p>
+
+                    {% if (publication.image is defined) and (publication.image != null) %}
+                        <span class="btn btn-img"><i class="fa fa-file-image-o"></i></span>
+                        <div class="pub-image">
+                            <img src="{{asset('uploads/publications/'~ publication.image )}}">
+                        </div>
+                    {% endif %}
+
+                    {% if (publication.document is defined) and (publication.document != null) %}
+                        <a class="btn" href="{{asset('uploads/documents/'~ publication.document )}}" target="_blank">
+                            <i class="fa fa-download"></i>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="col-md-1">
+                    <span class="btn btn-like ms-3" data-id="{{publication.id}}" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Fav"
+                    {% if app.user|liked(publication) == true %} hidden {% endif %}>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </span>
+                    <span class="btn btn-unlike active ms-3" data-id="{{publication.id}}" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Unfav"
+                    {% if app.user|liked(publication) == false %} hidden {% endif %}>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    {# Solo muestro borrar si soy el dueño del post #}
+                    {% if (publication.user.id is defined) and (publication.user.id == app.user.id) %}
+                        <span data-id="{{publication.id}}" class="btn btn-delete-pub text-danger ms-3" title="delete">
+                            <i class="fa fa-trash"></i>
+                        </span>
+                    {% endif %}
+                </div>
+                <hr>
+            </div>
+            {% endfor %}
+            <div class="navigation">
+                {{knp_pagination_render(pagination)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

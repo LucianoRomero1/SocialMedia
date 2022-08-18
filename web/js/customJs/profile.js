@@ -1,10 +1,10 @@
 $(function(){
 
     var ias = jQuery.ias({
-        container: '.timeline .box-content',
+        container: '.profile-box #user-publications',
         item: '.publication-item',
-        pagination: '.timeline .pagination',
-        next: '.timeline .pagination .next_link',
+        pagination: '.profile-box .pagination',
+        next: '.profile-box .pagination .next_link',
         triggerPageThreshold: 5
     });
 
@@ -14,7 +14,7 @@ $(function(){
     }));
 
     ias.extension(new IASSpinnerExtension({
-        src: '../img/ajax-loader.gif',
+        src: '../../img/ajax-loader.gif'
     }));
 
     ias.extension(new IASNoneLeftExtension({

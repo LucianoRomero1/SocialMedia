@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\PublicationType;
 use BackendBundle\Entity\Following;
+use BackendBundle\Entity\Like;
 use BackendBundle\Entity\Publication;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -120,9 +121,17 @@ class PublicationController extends Controller{
         $publication_repo   = $em->getRepository(Publication::class);
         $publication        = $publication_repo->find($id);
         $user               = $this->getUser();
+        $likes_repo         = $em->getRepository(Like::class);
+        $likes              = $likes_repo->findBy(["publication"=>$publication]);
 
         if($user->getId() == $publication->getUser()->getId()){
             $em->remove($publication);
+            //Reviso que ese post no esté faveado por el mismo user y post y lo elimino tmb
+            if(!empty($likes)){
+                foreach ($likes as $like) {
+                    $em->remove($like);
+                }
+            }  
             $flush = $em->flush();
             if($flush == null){
                 $status = 'Post deleted';

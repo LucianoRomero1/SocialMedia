@@ -2,13 +2,17 @@
 
 {% block javascripts %}
     {{parent()}}
-    <script src="{{asset('js/customJs/users.js')}}"></script>
+    <script src="{{asset('js/customJs/following.js')}}"></script>
 {% endblock %}
 
 {% block body %}
     <div class="container mt-2">
         <div class="col-md-12 box-default">
-            <h1>People</h1>
+            {% if type == "following" %}
+            <h4>People that {{profile_user.nick}} follows </h4>
+            {% else %}
+            <h4>People who follow  {{profile_user.nick}}</h4>
+            {% endif %}
             <div class="row">
                 <div class="col-md-6">
                     <form action="{{path('user_search')}}"> 
@@ -30,7 +34,14 @@
             </div> 
             <hr>
             <div class="box-content box-users">
-                {% for user in pagination %}
+                {% for follow in pagination %}
+
+                    {% if type == "following" %}
+                        {% set user = follow.followed %}
+                    {% else %}
+                        {% set user = follow.user %}
+                    {% endif %}
+
                     <div class="row user-item">
                         <div class="col-md-4 avatar">
                             {% if user.image == null %}

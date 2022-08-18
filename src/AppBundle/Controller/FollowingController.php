@@ -61,4 +61,64 @@ class FollowingController extends Controller
 
         return new Response($status);
     }
+
+    public function followingAction(Request $request, $nickname = null){
+        $em             = $this->getDoctrine()->getManager();
+        if($nickname != null){
+            $user_repo  = $em->getRepository(User::class);
+            $user       = $user_repo->findOneBy(["nick"=>$nickname]);
+        }else{
+            $user       = $this->getUser();
+        }
+
+        if(empty($user) || !is_object($user)){
+            //Nos devuelve a la home si no hay user
+            return $this->redirect($this->generateUrl("home_publications"));
+        }
+
+        $user_id        = $user->getId();
+        $dql            = "SELECT f FROM BackendBundle:Following f WHERE f.user = $user_id ORDER BY f.id DESC";
+        $query          = $em->createQuery($dql);
+
+        $paginator      = $this->get("knp_paginator");
+        $following      = $paginator->paginate(
+            $query, $request->query->getInt("page", 1),5
+        );
+
+        return $this->render("following/following.html.twig", array(
+            "type"          => "following",  
+            "profile_user"  => $user,
+            "pagination"    => $following
+        ));
+    }
+
+    public function followedAction(Request $request, $nickname = null){
+        $em             = $this->getDoctrine()->getManager();
+        if($nickname != null){
+            $user_repo  = $em->getRepository(User::class);
+            $user       = $user_repo->findOneBy(["nick"=>$nickname]);
+        }else{
+            $user       = $this->getUser();
+        }
+
+        if(empty($user) || !is_object($user)){
+            //Nos devuelve a la home si no hay user
+            return $this->redirect($this->generateUrl("home_publications"));
+        }
+
+        $user_id        = $user->getId();
+        $dql            = "SELECT f FROM BackendBundle:Following f WHERE f.followed = $user_id ORDER BY f.id DESC";
+        $query          = $em->createQuery($dql);
+
+        $paginator      = $this->get("knp_paginator");
+        $followed       = $paginator->paginate(
+            $query, $request->query->getInt("page", 1),5
+        );
+
+        return $this->render("following/following.html.twig", array(
+            "type"          => "followed",  
+            "profile_user"  => $user,
+            "pagination"    => $followed
+        ));
+    }
 }
