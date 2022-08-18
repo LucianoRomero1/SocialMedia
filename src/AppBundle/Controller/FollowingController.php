@@ -28,6 +28,8 @@ class FollowingController extends Controller
         $em->persist($following);
         $flush = $em->flush();
         if($flush == null){
+            $notification   = $this->get("app.notification_service");
+            $notification->set($followed, 'follow', $user->getId());
             $status = "You are following this user!!";
             // $this->addFlash('success', $status);
         }else{

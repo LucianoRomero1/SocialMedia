@@ -25,8 +25,10 @@ class LikeController extends Controller
         $like->setPublication($publication);
 
         $em->persist($like);
-        $flush = $em->flush();
+        $flush              = $em->flush();
         if($flush == null){
+            $notification   = $this->get("app.notification_service");
+            $notification->set($publication->getUser(), 'like', $user->getId(), $publication->getId());
             $status = "You like this post";
         }else{
             $status = "Failed to save like";

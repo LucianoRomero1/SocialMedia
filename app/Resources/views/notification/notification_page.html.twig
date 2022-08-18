@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-10 box-default box-notifications">
+        <h4>Notifications</h4>
+        <div class="box-content">
+            {% for notification in pagination %}
+                <div class="col-md-10 notification-item">
+                    <div class="alert alert-default row">
+                        <div class="col-md-1">
+                            <span>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="col-md-8">
+                            {% set notif_user = notification.typeId|get_user %}
+                            
+                            {% if notification.type == "follow" %}
+                                <a class="text-muted" href="{{path('user_profile', {'nickname': notif_user.nick})}}">{{notif_user.nick}}</a><span class="ms-2">started following you</span>
+                            {% endif %}
+                            {% if notification.type == "like" %}
+                                <a class="text-muted" href="{{path('user_profile', {'nickname': notif_user.nick})}}">{{notif_user.nick}}</a><span class="ms-2">liked your post</span> 
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

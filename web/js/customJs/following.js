@@ -47,7 +47,7 @@ function followButtons(){
         //Lo busco con parent porque está dentro del mismo div
         $(this).parent().find(".btn-unfollow").removeAttr('hidden');
         $.ajax({
-            url: './follow',
+            url: '../follow',
             type: 'POST',
             data: {followed: $(this).attr("data-followed")},
             success: function(response){
@@ -61,7 +61,7 @@ function followButtons(){
         //Lo busco con parent porque está dentro del mismo div
         $(this).parent().find(".btn-follow").removeAttr('hidden');
         $.ajax({
-            url: './unfollow',
+            url: '../unfollow',
             type: 'POST',
             data: {followed: $(this).attr("data-followed")},
             success: function(response){
