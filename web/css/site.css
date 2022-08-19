@@ -248,14 +248,14 @@ label {
 }
 
 .sendedTo{
-    color: #444;
+    color: lightskyblue;
     font-weight: bold;
     text-decoration: none;
 }
 
 .sendedTo:hover{
     text-decoration: underline;
-    color: #444;
+    color: lightskyblue;
 }
 
 

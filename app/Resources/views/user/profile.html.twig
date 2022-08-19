@@ -3,6 +3,7 @@
 {% block javascripts %}
     {{parent()}}
     <script src="{{asset('js/customJs/profile.js')}}"></script>
+    <script src="{{ asset('js/customJs/followButtons.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -18,6 +19,32 @@
         </div>
 
         <div class="name-surname">
+            {% if app.user.id != user.id %}
+            <div class="text-center m-3">
+
+                {% if user|following(app.user) == true %}
+                <button class="btn btn-sm btn-disable disable" disabled>Follows you</button>
+                {% else %}
+                <button class="btn btn-sm btn-disable disable" disabled>Not follows you</button>
+                {% endif %}
+
+                <button class="btn btn-sm btn-success btn-follow" 
+                    {% if app.user|following(user) == true %}
+                        hidden
+                    {% endif %}
+                    data-followed="{{user.id}}" title="Follow">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <button class="btn btn-sm btn-dark btn-unfollow" 
+                    {% if app.user|following(user) == false %}
+                        hidden
+                    {% endif %}
+                    data-followed="{{user.id}}" title="Unfollow">
+                    <i class="fa-solid fa-user-minus"></i>
+                </button>
+            </div>
+            {% endif %}
+
             <h2>{{user.name}} {{user.surname}}</h2>
             <span class="nickname">{{user.nick}}</span>
         </div>
