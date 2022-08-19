@@ -242,5 +242,22 @@ label {
     font-weight: bold;
 }
 
+/* Private messages */
+.form-message input, .form-message select, .form-message textarea{
+    margin-bottom: 10px;
+}
+
+.sendedTo{
+    color: #444;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.sendedTo:hover{
+    text-decoration: underline;
+    color: #444;
+}
+
+
 
 
